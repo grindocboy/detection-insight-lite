@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Local-first validation for SPL, KQL, Sigma, and YARA-L detections." />
+    <meta name="color-scheme" content="dark" />
+    <title>Detection Insight Lite</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="#">Detection Insight <span>Lite</span></a>
+      <div class="privacy"><span class="status-dot"></span> Local analysis only</div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <p class="eyebrow">Detection engineering workbench</p>
+        <h1>Know if a detection is ready<br />before you ship it.</h1>
+        <p class="subtitle">Validate security coverage, performance, privacy, and test readiness without uploading your rule anywhere.</p>
+        <div class="focus-row" aria-label="Focus areas">
+          <span>SaaS</span><span>Identity</span><span>Cloud</span><span>Regulated</span><span>High security</span>
+        </div>
+      </section>
+
+      <section class="workspace" aria-label="Detection validator">
+        <div class="editor-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="label">Rule input</p>
+              <h2>Analyze a detection</h2>
+            </div>
+            <button id="sampleButton" class="text-button" type="button">Load sample</button>
+          </div>
+
+          <div class="type-tabs" role="tablist" aria-label="Rule type">
+            <button class="active" data-type="spl" role="tab">Splunk SPL</button>
+            <button data-type="kql" role="tab">Sentinel KQL</button>
+            <button data-type="sigma" role="tab">Sigma</button>
+            <button data-type="yaral" role="tab">Chronicle YARA-L</button>
+          </div>
+
+          <label class="sr-only" for="ruleInput">Detection rule</label>
+          <textarea id="ruleInput" spellcheck="false" autocomplete="off"></textarea>
+          <div class="editor-footer">
+            <span id="charCount">0 characters</span>
+            <span>Processed in this browser</span>
+          </div>
+          <button id="analyzeButton" class="primary-button" type="button">Analyze detection <span>→</span></button>
+        </div>
+
+        <div class="results-panel" id="resultsPanel" aria-live="polite">
+          <div class="empty-state">
+            <div class="radar-icon">⌁</div>
+            <h2>Assessment ready</h2>
+            <p>Paste a detection or load a sample to receive a readiness score and prioritized findings.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="principles">
+        <article><span>01</span><h3>Public-safe by design</h3><p>No credentials, tenant connections, internal rules, or server-side processing.</p></article>
+        <article><span>02</span><h3>Security-weighted</h3><p>Prioritizes identity compromise, privilege, token abuse, tampering, and exfiltration.</p></article>
+        <article><span>03</span><h3>Actionable output</h3><p>Every finding explains the risk and gives a concrete remediation or test step.</p></article>
+      </section>
+    </main>
+
+    <footer>Detection Insight Lite · Deterministic guidance for authorized defensive use</footer>
+    <script type="module" src="./src/app.js"></script>
+  </body>
+</html>
