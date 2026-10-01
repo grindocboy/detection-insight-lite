@@ -36,7 +36,8 @@ button { cursor: pointer; }
 }
 .brand { color: var(--text); font-weight: 780; text-decoration: none; letter-spacing: -.025em; }
 .brand span { color: var(--mint); font-weight: 560; }
-.privacy { color: var(--muted); font-size: 13px; display: flex; align-items: center; gap: 8px; }
+.privacy { color: var(--muted); font-size: 13px; display: flex; align-items: center; gap: 8px; text-decoration: none; }
+.privacy:hover, footer a { color: var(--mint); }
 .status-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--mint); box-shadow: 0 0 12px var(--mint); }
 main { width: min(1320px, calc(100% - 36px)); margin: auto; }
 .hero { padding: 78px 0 48px; }
@@ -90,6 +91,14 @@ textarea:focus { border-color: #3a8067; box-shadow: 0 0 0 3px rgba(101,240,189,.
 .principles h3 { margin: 18px 0 8px; font-size: 17px; }
 .principles p { margin: 0; color: var(--muted); line-height: 1.55; font-size: 13px; }
 footer { padding: 30px; border-top: 1px solid var(--line); color: #60706b; text-align: center; font-size: 12px; }
+footer a { text-decoration: none; }
+.privacy-page { width: min(820px, calc(100% - 36px)); margin: 70px auto; }
+.privacy-page h1 { font-size: clamp(38px, 7vw, 68px); }
+.privacy-page h2 { margin-top: 40px; font-size: 21px; }
+.privacy-page p, .privacy-page li { color: var(--muted); line-height: 1.7; }
+.privacy-page code { color: var(--mint); }
+.assurance-box { margin: 28px 0; padding: 22px; border: 1px solid #315c4c; border-radius: 12px; background: rgba(101,240,189,.05); }
+.back-link { display: inline-block; margin-bottom: 28px; color: var(--mint); text-decoration: none; }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 @media (max-width: 860px) {
   .workspace { grid-template-columns: 1fr; }

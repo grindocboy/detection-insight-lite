@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Privacy and local-processing guarantees for Detection Insight Lite." />
+    <meta name="color-scheme" content="dark" />
+    <meta name="referrer" content="no-referrer" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'none'; img-src 'self' data:; style-src 'self'; script-src 'self'; font-src 'self'; object-src 'none'; frame-src 'none'; worker-src 'none'; manifest-src 'none'; form-action 'none'; base-uri 'none';" />
+    <title>Privacy · Detection Insight Lite</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="./index.html">Detection Insight <span>Lite</span></a>
+      <div class="privacy"><span class="status-dot"></span> No outbound connections</div>
+    </header>
+    <main class="privacy-page">
+      <a class="back-link" href="./index.html">← Back to validator</a>
+      <p class="eyebrow">Privacy and verification</p>
+      <h1>Your detection stays in your browser.</h1>
+      <div class="assurance-box">
+        Detection Insight Lite has no application backend, accounts, database,
+        analytics, cookies, telemetry, advertising, or external API calls. Rule
+        analysis runs as JavaScript in the browser tab you opened.
+      </div>
+
+      <h2>Technical enforcement</h2>
+      <p>The site declares a Content Security Policy containing <code>connect-src 'none'</code>. Compatible browsers block outbound fetch, XMLHttpRequest, WebSocket, EventSource, and beacon traffic from the application. The policy also blocks forms, frames, plug-ins, workers, and third-party scripts.</p>
+
+      <h2>What remains on your device</h2>
+      <ul>
+        <li>The detection text in the editor exists only in the current page memory.</li>
+        <li>No detection is written to localStorage, sessionStorage, IndexedDB, cookies, or a service worker.</li>
+        <li>A report is created only when you choose Download report.</li>
+        <li>Sanitized text enters your clipboard only when you choose Copy sanitized rule.</li>
+        <li>Closing or refreshing the tab discards editor contents that you did not download or copy.</li>
+      </ul>
+
+      <h2>Hosting metadata</h2>
+      <p>GitHub Pages serves the static files and may process ordinary web-request metadata such as IP address, browser details, requested URL, and timestamp under GitHub's own policies. Detection text is not placed in the URL and is not transmitted with those page requests.</p>
+
+      <h2>Verify it yourself</h2>
+      <ol>
+        <li>Open browser Developer Tools and select the Network panel.</li>
+        <li>Clear existing entries, paste a non-sensitive test rule, and select Analyze detection.</li>
+        <li>Observe that analysis produces no network request.</li>
+        <li>Inspect the public source and search for <code>fetch</code>, <code>XMLHttpRequest</code>, <code>WebSocket</code>, <code>sendBeacon</code>, storage APIs, and third-party scripts.</li>
+      </ol>
+
+      <h2>Important limitation</h2>
+      <p>This design greatly reduces disclosure risk, but users should still avoid pasting live credentials, customer data, classified information, controlled unclassified information, or proprietary detections into any public website. Use an approved offline copy for sensitive environments and review the exact source before use.</p>
+    </main>
+    <footer>Detection Insight Lite · Local-first detection engineering</footer>
+  </body>
+</html>

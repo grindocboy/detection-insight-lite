@@ -1,3 +1,4 @@
+import { edrSample, generatePlaybook } from "./edr.js";
 import { RULE_TYPES, samples, sanitizeForExport, validateDetection } from "./validator.js";
 
 const input = document.querySelector("#ruleInput");
@@ -16,7 +17,8 @@ function updateCount() {
 }
 
 function loadSample() {
-  input.value = samples[currentType];
+  input.value = currentType === "edr" ? edrSample : samples[currentType];
+  lastAssessment = null;
   updateCount();
   input.focus();
 }
@@ -28,13 +30,21 @@ function findingHtml(item) {
   </article>`;
 }
 
+function renderPlaybook(assessment) {
+  results.innerHTML = `<p class="label">EDR response playbook</p><h2>${escapeHtml(assessment.template)}</h2><p>${escapeHtml(assessment.execution)}</p><p>${escapeHtml(assessment.basis)}</p>
+    ${assessment.unknowns.map(note => `<article class="finding medium"><p>${escapeHtml(note)}</p></article>`).join("")}
+    ${assessment.steps.map(step => `<article class="finding ${step.approvalRequired ? "medium" : "pass"}"><h4>${escapeHtml(step.phase)}${step.approvalRequired ? " · Approval required" : ""}</h4><p>${escapeHtml(step.action)}</p></article>`).join("")}
+    <div class="actions"><button class="secondary-button" id="downloadReport">Download playbook JSON</button></div>`;
+  document.querySelector("#downloadReport").addEventListener("click", downloadReport);
+}
+
 function render(assessment) {
   const { score, grade, findings, passes, stats, testPlan } = assessment;
   const summary = findings.length ? `${findings.length} item${findings.length === 1 ? "" : "s"} need review before platform testing.` : "No deterministic issue was found. Live compilation and telemetry testing are still required.";
   results.innerHTML = `
     <div class="score-row">
       <div class="score">${score}<small>/ 100</small></div>
-      <div class="score-copy"><p class="label">${escapeHtml(RULE_TYPES[currentType])}</p><h2>${escapeHtml(grade)}</h2><p>${escapeHtml(summary)}</p></div>
+      <div class="score-copy"><p class="label">${escapeHtml(RULE_TYPES[currentType] || "EDR alert JSON")}</p><h2>${escapeHtml(grade)}</h2><p>${escapeHtml(summary)}</p></div>
     </div>
     <div class="summary-grid">
       <div><strong>${stats.high}</strong><span>High</span></div>
@@ -52,9 +62,10 @@ function render(assessment) {
 
 function analyze() {
   try {
-    lastAssessment = validateDetection(currentType, input.value);
-    render(lastAssessment);
+    lastAssessment = currentType === "edr" ? generatePlaybook(input.value) : validateDetection(currentType, input.value);
+    if (currentType === "edr") renderPlaybook(lastAssessment); else render(lastAssessment);
   } catch (error) {
+    lastAssessment = null;
     results.innerHTML = `<div class="empty-state"><h2>Analysis stopped</h2><p>${escapeHtml(error.message)}</p></div>`;
   }
 }
@@ -87,7 +98,7 @@ for (const tab of tabs) {
     tabs.forEach(item => item.classList.toggle("active", item === tab));
     tabs.forEach(item => item.setAttribute("aria-selected", String(item === tab)));
     loadSample();
-    results.innerHTML = `<div class="empty-state"><div class="radar-icon">⌁</div><h2>${escapeHtml(RULE_TYPES[currentType])}</h2><p>Sample loaded. Analyze it or replace it with your own public-safe rule.</p></div>`;
+    results.innerHTML = `<div class="empty-state"><div class="radar-icon">⌁</div><h2>${escapeHtml(RULE_TYPES[currentType] || "EDR alert JSON")}</h2><p>Sample loaded. Analyze it or replace it with your own public-safe rule.</p></div>`;
   });
 }
 
