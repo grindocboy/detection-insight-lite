@@ -44,6 +44,14 @@
             <button data-type="edr" role="tab">EDR response</button>
           </div>
 
+          <section id="attackCatalog" hidden>
+            <label for="techniqueSearch">Find an ATT&amp;CK technique</label>
+            <input id="techniqueSearch" type="search" placeholder="Search ID, name, tactic, or platform" autocomplete="off" />
+            <label class="sr-only" for="techniqueSelect">ATT&amp;CK technique</label>
+            <select id="techniqueSelect"></select>
+            <button id="addTechnique" class="secondary-button" type="button">Add technique to alert</button>
+            <p id="catalogStatus" class="catalog-note"></p>
+          </section>
           <label class="sr-only" for="ruleInput">Detection rule</label>
           <textarea id="ruleInput" spellcheck="false" autocomplete="off"></textarea>
           <div class="editor-footer">

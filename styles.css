@@ -111,3 +111,9 @@ footer a { text-decoration: none; }
   .hero { padding-top: 55px; }
   .summary-grid { grid-template-columns: 1fr 1fr; }
 }
+
+#attackCatalog { margin: 16px 0; padding: 15px; border: 1px solid var(--line); border-radius: 10px; }
+#attackCatalog label { font-size: 12px; color: var(--muted); }
+#attackCatalog input, #attackCatalog select { width: 100%; margin: 8px 0; padding: 10px; color: var(--text); background: var(--bg); border: 1px solid var(--line); border-radius: 6px; }
+.catalog-note { font-size: 12px; line-height: 1.5; color: var(--muted); }
+.results-panel a { color: var(--mint); font-size: 12px; }
